@@ -6,6 +6,10 @@ const { notes } = require('./db/db');
 const PORT = process.env.PORT || 3001;
 // initiate the server:
 const app = express();
+// parse incoming string or array data
+app.use(express.urlencoded({ extended: true }));
+// parse incoming JSON data
+app.use(express.json());
 
 // filterByQuery():
 function filterByQuery(query, notesArray) {
@@ -15,6 +19,9 @@ function filterByQuery(query, notesArray) {
   }
   if (query.text) {
     filteredResults = filteredResults.filter(notes => notes.text === query.text);
+  }
+  if (query.id) {
+    filteredResults = filteredResults.filter(notes => notes.id === query.id);
   }
   return filteredResults;
 }
@@ -26,19 +33,16 @@ function findById(id, notesArray) {
 }
 
 // add the routes for 'notes' array in 'db.json' file in 'db' folder:
-// 1)
-app.get('/api/notes', (req, res) => {
-  res.json(notes);
-});
-// 2)
+// 1) GET request
 app.get('/api/notes', (req, res) => {
   let results = notes;
   if (req.query) {
-    results = notes.find(req.query, results);
+    results = filterByQuery(req.query, results);
   }
   res.json(results);
 });
-// 3)
+
+// 2) GET request
 app.get('/api/notes/:id', (req, res) => {
   const result = findById(req.params.id, notes);
   if (result) {
@@ -46,6 +50,13 @@ app.get('/api/notes/:id', (req, res) => {
   } else {
     res.sendStatus(404);
   }
+});
+
+// 3) POST request:
+app.post('/api/notes', (req, res) => {
+  // req.body is where our incoming content will be
+  console.log(req.body);
+  res.json(req.body);
 });
 
 
