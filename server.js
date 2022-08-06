@@ -14,14 +14,15 @@ function filterByQuery(query, notesArray) {
   if (query.text) {
     filteredResults = filteredResults.filter(notes => notes.text === query.text);
   }
-  return filteredresults;
+  return filteredResults;
 }
 
-// add the routes:
+// add the routes for 'notes' array in 'db.json' file in 'db' folder:
+// 1)
 app.get('/api/notes', (req, res) => {
   res.json(notes);
 });
-
+// 2)
 app.get('/api/notes', (req, res) => {
   let results = notes;
   if (req.query) {
@@ -33,7 +34,7 @@ app.get('/api/notes', (req, res) => {
 
 
 
-// make our server listen:
+// make server listen:
 app.listen(3001, () => {
   console.log(`API server now on port 3001`);
 });

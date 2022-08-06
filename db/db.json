@@ -1,8 +1,16 @@
 {
   "notes": [
     {
-        "title":"Hello",
-        "text":"Test text"
+        "title": "Hello",
+        "text": "First note is here"
+    },
+    {
+        "title": "Hello-02",
+        "text": "Second note is here"
+    },
+    {
+        "title": "Hello-03",
+        "text": "Third note is here"
     }
   ]
 }
