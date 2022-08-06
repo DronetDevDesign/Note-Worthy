@@ -2,6 +2,8 @@
 const express = require('express');
 // require the data from the "db" folder containing "db.json"
 const { notes } = require('./db/db');
+// for heroku
+const PORT = process.env.PORT || 3001;
 // initiate the server:
 const app = express();
 
@@ -35,6 +37,6 @@ app.get('/api/notes', (req, res) => {
 
 
 // make server listen:
-app.listen(3001, () => {
+app.listen(PORT, () => {
   console.log(`API server now on port 3001`);
 });
