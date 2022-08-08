@@ -3,7 +3,7 @@ const path = require('path');
 // require express:
 const express = require('express');
 // require the data from the "db" folder containing "db.json"
-const { notes } = require('./db/db');
+let { notes } = require('./db/db');
 // for heroku
 const PORT = process.env.PORT || 3001;
 // initiate the server:
@@ -97,9 +97,19 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, './public/index.html'));
 });
 // 5) GET request set for notes.html page:
-// app.get('/', (req, res) => {
-//   res.sendFile(path.join(__dirname, './public/notes.html'));
-// });
+app.get('/notes', (req, res) => {
+  res.sendFile(path.join(__dirname, './public/notes.html'));
+});
+// 6) DELETE route "the contract" between frontend and backend:
+app.delete('/api/notes/:id', (req, res) => {
+  const filteredItems = notes.filter(note => note.id != req.params.id);
+  fs.writeFileSync(
+    path.join(__dirname, './db/db.json'),
+    JSON.stringify({ notes: filteredItems }, null, 2)
+  );
+  notes = filteredItems;
+  res.send();
+});
 
 
 // make server listen:

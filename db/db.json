@@ -1,34 +1,3 @@
 {
-  "notes": [
-    {
-      "id": "0",
-      "title": "Hello",
-      "text": "First note is here"
-    },
-    {
-      "id": "1",
-      "title": "Hello-02",
-      "text": "Second note is here"
-    },
-    {
-      "id": "2",
-      "title": "Hello-03",
-      "text": "Third note is here"
-    },
-    {
-      "title": "Hello-04",
-      "text": "Fourth note is here",
-      "id": "3"
-    },
-    {
-      "title": "Hello-04",
-      "text": "Fourth note is here",
-      "id": "4"
-    },
-    {
-      "title": "Hello-04",
-      "text": "Fourth note is here",
-      "id": "5"
-    }
-  ]
+  "notes": []
 }
