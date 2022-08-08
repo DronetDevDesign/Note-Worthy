@@ -1,8 +1,12 @@
-# Note-Worthy
+# Note-Worthy App
 ## An easy to use note taking app worth your time!
 
 ## Purpose:
-The Team Dash app is an HTML file generator that works using the command line. A manager simply inputs employee information when prompted to created a professional looking and easy to read HTML landing page.
+The Note Worthy app helps users stay on top of tasks by entering a title with a text note then clicking the floppy disc in the upper right hand corner to save it to their list! Once the user has completed the task, they can delete the task by clicking the trashcan icon to the right of the note.
+To launch the app, simply click the link below then click the "Get Started" button on the landing page! 
+
+## Live Heroku App URL:
+## https://dronet-note-worthy-app.herokuapp.com/
 
 <br>
 <div align="left">
@@ -10,20 +14,15 @@ The Team Dash app is an HTML file generator that works using the command line. A
 </div>
 <br>
 
-
-## Live App URL:
-https://dronet-note-worthy-app.herokuapp.com/
-
 ## This Website Created Using:
 * HTML 
 * CSS
 * JavaScript
 * NodeJS 
-* Inquirer
-* Jest 
-* GoogleFonts 
+* Express
+* Bootstrap
 * GitHub
-* IonIcons
+* Heroku
 
 ## Contribute:
 ### Please contact me regarding contributing to this repository. All additions must be approved.
