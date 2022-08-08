@@ -12,6 +12,8 @@ const app = express();
 app.use(express.urlencoded({ extended: true }));
 // parse incoming JSON data
 app.use(express.json());
+// include the public folder so ALL files in it can be accessed:
+app.use(express.static('public'));
 
 // filterByQuery():
 function filterByQuery(query, notesArray) {
@@ -90,6 +92,14 @@ app.post('/api/notes', (req, res) => {
     res.json(note);
   }
 });
+// 4) GET request set for index.html page:
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, './public/index.html'));
+});
+// 5) GET request set for notes.html page:
+// app.get('/', (req, res) => {
+//   res.sendFile(path.join(__dirname, './public/notes.html'));
+// });
 
 
 // make server listen:
