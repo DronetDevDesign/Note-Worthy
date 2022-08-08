@@ -1,3 +1,5 @@
+const fs = require('fs');
+const path = require('path');
 // require express:
 const express = require('express');
 // require the data from the "db" folder containing "db.json"
@@ -32,6 +34,28 @@ function findById(id, notesArray) {
   return result;
 }
 
+// create new note function:
+function createNewNote(body, notesArray) {
+  const note = body;
+  notesArray.push(note);
+  fs.writeFileSync(
+    path.join(__dirname, './db/db.json'),
+    JSON.stringify({ notes: notesArray }, null, 2)
+  );
+  return note;
+}
+
+// validation that both title and text have been entered:
+function validateNote(note) {
+  if (!note.title || typeof note.title !== 'string') {
+    return false;  
+  }
+  if (!note.text || typeof note.text !== 'string') {
+    return false;
+  }
+  return true;
+}
+
 // add the routes for 'notes' array in 'db.json' file in 'db' folder:
 // 1) GET request
 app.get('/api/notes', (req, res) => {
@@ -41,7 +65,6 @@ app.get('/api/notes', (req, res) => {
   }
   res.json(results);
 });
-
 // 2) GET request
 app.get('/api/notes/:id', (req, res) => {
   const result = findById(req.params.id, notes);
@@ -51,15 +74,22 @@ app.get('/api/notes/:id', (req, res) => {
     res.sendStatus(404);
   }
 });
-
 // 3) POST request:
 app.post('/api/notes', (req, res) => {
-  // req.body is where our incoming content will be
-  console.log(req.body);
-  res.json(req.body);
+  // req.body is where our incoming content will be;
+  // set ID based on what the next index of the array will be:
+  req.body.id = notes.length.toString();
+  // if any data in req.body is incorrect, send 404 error back:
+  if (!validateNote(req.body)) {
+    // res.status().send() is a response method to relay a message that something went wrong:
+    res.status(404).send('Your NOTE is not properly formatted.');  
+  } else {
+    // add note to json file and notes array in this function:
+    const note = createNewNote(req.body, notes);
+
+    res.json(note);
+  }
 });
-
-
 
 
 // make server listen:
