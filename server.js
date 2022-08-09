@@ -19,7 +19,7 @@ app.use(express.static('public'));
 function filterByQuery(query, notesArray) {
   let filteredResults = notesArray;
   if (query.title) {
-    filteredResults = filteredResults.filter(notes => notes.title === query.title);  
+    filteredResults = filteredResults.filter(notes => notes.title === query.title);
   }
   if (query.text) {
     filteredResults = filteredResults.filter(notes => notes.text === query.text);
@@ -50,7 +50,7 @@ function createNewNote(body, notesArray) {
 // validation that both title and text have been entered:
 function validateNote(note) {
   if (!note.title || typeof note.title !== 'string') {
-    return false;  
+    return false;
   }
   if (!note.text || typeof note.text !== 'string') {
     return false;
@@ -71,7 +71,7 @@ app.get('/api/notes', (req, res) => {
 app.get('/api/notes/:id', (req, res) => {
   const result = findById(req.params.id, notes);
   if (result) {
-    res.json(result); 
+    res.json(result);
   } else {
     res.sendStatus(404);
   }
@@ -84,7 +84,7 @@ app.post('/api/notes', (req, res) => {
   // if any data in req.body is incorrect, send 404 error back:
   if (!validateNote(req.body)) {
     // res.status().send() is a response method to relay a message that something went wrong:
-    res.status(404).send('Your NOTE is not properly formatted.');  
+    res.status(404).send('Your NOTE is not properly formatted.');
   } else {
     // add note to json file and notes array in this function:
     const note = createNewNote(req.body, notes);
@@ -100,7 +100,7 @@ app.get('/', (req, res) => {
 app.get('/notes', (req, res) => {
   res.sendFile(path.join(__dirname, './public/notes.html'));
 });
-// 6) DELETE route "the contract" between frontend and backend:
+// 6) DELETE route:
 app.delete('/api/notes/:id', (req, res) => {
   const filteredItems = notes.filter(note => note.id != req.params.id);
   fs.writeFileSync(
